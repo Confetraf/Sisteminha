@@ -22,3 +22,42 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# ----------------------------------
+# PASTAS E ARQUIVOS DE BUILD/OUTPUT
+# ----------------------------------
+# Pasta de saída da compilação, definida no angular.json (padrão é 'dist')
+site-confetraf-angular/dist
+
+# Arquivos de log de cobertura de testes (Test Coverage)
+site-confetraf-angular/coverage
+
+# ----------------------------------
+# DEPENDÊNCIAS DO NODE
+# ----------------------------------
+# A pasta node_modules contém todas as dependências instaladas via npm.
+# Essa pasta é recriada quando o projeto é clonado e se roda 'npm install'.
+site-confetraf-angular/node_modules
+
+# ----------------------------------
+# CONFIGURAÇÕES DA IDE E CACHE
+# ----------------------------------
+# Cache do Angular CLI
+site-confetraf-angular/.angular/cache/
+
+# Diretório de cache de pacotes (npm/yarn/pnpm)
+site-confetraf-angular/.npm/
+site-confetraf-angular/.yarn/
+site-confetraf-angular/.pnpm-store/
+
+# Metadados de ambiente (geralmente gerados pelo VS Code)
+site-confetraf-angular/.vscode/
+
+# ----------------------------------
+# ARQUIVOS DE LOGS E TEMPORÁRIOS
+# ----------------------------------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store # (Arquivos gerados pelo macOS)
