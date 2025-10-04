@@ -1,3 +1,12 @@
+site-confetraf-apiRest/.classpath
+site-confetraf-apiRest/target/
+site-confetraf-apiRest/.dbeaver/
+site-confetraf-apiRest/.factorypath
+site-confetraf-apiRest/.project
+site-confetraf-apiRest/.settings/
+site-confetraf-apiRest/.vscode/
+site-confetraf-apiRest/.idea/
+site-confetraf-apiRest/.externalToolBuilders/
 # Compiled class file
 *.class
 
@@ -61,3 +70,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .DS_Store # (Arquivos gerados pelo macOS)
+
