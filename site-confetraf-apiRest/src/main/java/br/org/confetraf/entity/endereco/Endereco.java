@@ -1,20 +1,15 @@
 package br.org.confetraf.entity.endereco;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Set;
-
 import br.org.confetraf.entity.Auditable;
-import br.org.confetraf.entity.enums.converters.ibge.UnidadeFederativaConverter;
-import br.org.confetraf.entity.enums.ibge.UnidadeFederativa;
-import br.org.confetraf.entity.ibge.Municipio;
+import br.org.confetraf.entity.converters.UnidadeFederativaConverter;
+import br.org.confetraf.entity.enums.UnidadeFederativa;
 import br.org.confetraf.entity.pessoa.PessoaFisica;
-import br.org.confetraf.entity.publicacao.Categoria;
-import br.org.confetraf.entity.publicacao.Publicacao;
-import br.org.confetraf.entity.usuario.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,39 +31,46 @@ import lombok.NoArgsConstructor;
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@Table(name = "tb_end_endereco")
+@Table(name = "tb_end_endr")
 public class Endereco extends Auditable implements Serializable {
 
 	private static final long serialVersionUID = 7829486780841849335L;
-
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "end_seq")
-	@SequenceGenerator(name = "end_seq", sequenceName = "end_seq", allocationSize = 50)
-	private long end_id;
 	
-	@Column(name = "end_logradouro", unique = true, nullable = false, columnDefinition = "VARCHAR(150)")
-	@EqualsAndHashCode.Include
-	private String logradouro;
-	
-	@Column(name = "end_complemento", nullable = true, columnDefinition = "VARCHAR(100)")
-	private String complemento;
-	
-	@Column(name = "end_numero", nullable = true, columnDefinition = "VARCHAR(10)")
-	private String numero;
-	
-	@Column(name = "end_Bai_Dist", nullable = true, columnDefinition = "VARCHAR(100)")
-	private String bairroDistrito;
-	
-	@Convert(converter = UnidadeFederativaConverter.class)
-	@Column(name = "end_uf", nullable = false, columnDefinition = "INT")
-	private UnidadeFederativa unidadeFederativa;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "endr_seq")
+	@SequenceGenerator(name = "endr_seq", sequenceName = "endr_seq", allocationSize = 50)
+	private long endr_id;
 	
 	@ManyToOne
-	@JoinColumn(name = "mun_id")
+	@JoinColumn(
+		    name = "logr_id",
+		    nullable = false,
+		    foreignKey = @ForeignKey(name = "fk_logr_endr") 
+		)
 	@EqualsAndHashCode.Include
-	private Municipio municipio;
+	private Logradouro logradouro;
+	
+	@Column(name = "endr_compl"
+			+ "", nullable = true, columnDefinition = "VARCHAR(100)")
+	private String complemento;
+	
+	@Column(name = "endr_num", nullable = true, columnDefinition = "VARCHAR(10)")
+	private String numero;
+	
+	@Convert(converter = UnidadeFederativaConverter.class)
+	@Column(name = "enduf", nullable = false, columnDefinition = "INT")
+	private UnidadeFederativa unidadeFederativa;
 	
 	@ManyToMany
-	@JoinTable( name = "tb_pessoa_endereco", joinColumns = @JoinColumn(name = "end_id"), inverseJoinColumns = @JoinColumn(name = "pes_id") ) 
+	@JoinTable( name = "tb_pes_endr", joinColumns = @JoinColumn(name = "end_id"), inverseJoinColumns = @JoinColumn(name = "pes_id") ) 
 	private Set<PessoaFisica> pessoas;
+	
+	public String getNomeBairro() {
+		return this.logradouro.getNomeBairro();
+	}
+	
+	public String getNomeMunicipio() {
+		return this.logradouro.getNomeMunicipio();
+	}
 
 }

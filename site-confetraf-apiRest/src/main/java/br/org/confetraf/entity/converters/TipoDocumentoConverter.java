@@ -1,8 +1,9 @@
-package br.org.confetraf.entity.enums.converters;
+package br.org.confetraf.entity.converters;
 
-import br.org.confetraf.entity.pessoa.documento.TipoDocumento;
 import jakarta.persistence.AttributeConverter;
 import java.util.stream.Stream;
+
+import br.org.confetraf.entity.enums.TipoDocumento;
 
 public class TipoDocumentoConverter implements AttributeConverter<TipoDocumento, Integer> {
 

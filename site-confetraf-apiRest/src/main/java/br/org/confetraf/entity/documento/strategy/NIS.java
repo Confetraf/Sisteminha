@@ -1,6 +1,6 @@
-package br.org.confetraf.entity.pessoa.documento;
+package br.org.confetraf.entity.documento.strategy;
 
-import static br.org.confetraf.entity.pessoa.documento.DocumentoUtils.limparNumero;
+import static br.org.confetraf.entity.documento.DocumentoUtils.limparNumero;
 
 public class NIS implements IDocumentoStrategy {
 

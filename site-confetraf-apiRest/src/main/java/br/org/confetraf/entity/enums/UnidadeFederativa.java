@@ -1,4 +1,4 @@
-package br.org.confetraf.entity.enums.ibge;
+package br.org.confetraf.entity.enums;
 
 public enum UnidadeFederativa {
 	AC(12, "AC", "Acre"), AL(27, "AL", "Alagoas"), AM(13, "AM", "Amazonas"), AP(16, "AP", "Amapá"),

@@ -1,4 +1,9 @@
-package br.org.confetraf.entity.pessoa.documento;
+package br.org.confetraf.entity.enums;
+
+import br.org.confetraf.entity.documento.strategy.CPF;
+import br.org.confetraf.entity.documento.strategy.IDocumentoStrategy;
+import br.org.confetraf.entity.documento.strategy.NIS;
+import br.org.confetraf.entity.documento.strategy.RG;
 
 public enum TipoDocumento {
 	

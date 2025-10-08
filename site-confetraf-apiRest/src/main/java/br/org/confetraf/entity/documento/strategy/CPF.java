@@ -1,6 +1,8 @@
-package br.org.confetraf.entity.pessoa.documento;
+package br.org.confetraf.entity.documento.strategy;
 
-import static br.org.confetraf.entity.pessoa.documento.DocumentoUtils.limparNumero;
+import static br.org.confetraf.entity.documento.DocumentoUtils.limparNumero;
+
+import br.org.confetraf.entity.documento.Documento;
 
 public class CPF extends Documento implements IDocumentoStrategy {
 

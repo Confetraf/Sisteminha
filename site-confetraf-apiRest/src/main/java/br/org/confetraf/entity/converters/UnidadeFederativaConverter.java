@@ -1,8 +1,9 @@
-package br.org.confetraf.entity.enums.converters.ibge;
+package br.org.confetraf.entity.converters;
 
-import br.org.confetraf.entity.enums.ibge.UnidadeFederativa;
 import jakarta.persistence.AttributeConverter;
 import java.util.stream.Stream;
+
+import br.org.confetraf.entity.enums.UnidadeFederativa;
 
 public class UnidadeFederativaConverter implements AttributeConverter<UnidadeFederativa, Integer> {
 

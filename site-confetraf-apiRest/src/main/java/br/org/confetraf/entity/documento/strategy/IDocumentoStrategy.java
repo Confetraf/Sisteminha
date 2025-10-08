@@ -1,4 +1,4 @@
-package br.org.confetraf.entity.pessoa.documento;
+package br.org.confetraf.entity.documento.strategy;
 
 public interface IDocumentoStrategy {
 	

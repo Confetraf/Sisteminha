@@ -1,14 +1,13 @@
 package br.org.confetraf.entity.publicacao;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-
-import org.hibernate.annotations.ManyToAny;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import br.org.confetraf.entity.Auditable;
 import br.org.confetraf.entity.usuario.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,38 +30,43 @@ import lombok.NoArgsConstructor;
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@Table(name = "tb_pub_publicacao")
-public class Publicacao extends Auditable {
+@Table(name = "tb_pub_pbl", uniqueConstraints = {
+		@UniqueConstraint(name = "unq_pbl_tit", columnNames = {"pbl_tit"})
+})
+public class Publicacao extends Auditable implements Serializable {
 	
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pub_seq")
-	@SequenceGenerator(name = "pub_seq", sequenceName = "pub_seq", allocationSize = 50)
-	public Long pub_id;
+	private static final long serialVersionUID = -7408005923676328299L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pbl_seq")
+	@SequenceGenerator(name = "pbl_seq", sequenceName = "pbl_seq", allocationSize = 50)
+	public Long pbl_id;
 	
-	@Column(name = "pub_titulo", nullable = false, unique = true, columnDefinition = "VARCHAR(100)" )
+	@Column(name = "pbl_tit", nullable = false, columnDefinition = "VARCHAR(100)" )
 	@EqualsAndHashCode.Include
 	public String titulo;
 	
-	@Column(name = "pub_subtitulo", nullable = false, unique = true, columnDefinition = "VARCHAR(200)" )
+	@Column(name = "pbl_subt", nullable = false, columnDefinition = "VARCHAR(100)" )
 	public String subTitulo;
 	
 	@Lob
-	@Column(name = "pub_conteudo", nullable = false, columnDefinition = "NVARCHAR(MAX)")
+	@Column(name = "pbl_corp", nullable = false, columnDefinition = "TEXT")
 	public String corpo;
 	
-	@ManyToAny
-	@JoinColumn(name = "Pub_cat_id")
+	@ManyToOne
+	@JoinColumn(name = "cat_id",
+	foreignKey = @ForeignKey(name = "fk_cat_pbl"))
 	public Categoria categoria;
 	
-	@Column(name = "pub_ini_publicacao", nullable = false, columnDefinition = "DATETIME")
+	@Column(name = "pbl_ini_dt", nullable = false, columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	public LocalDate dataInicioPublicacao;
 	
-	@Column(name = "pub_fim_publicacao", nullable = false, columnDefinition = "DATETIME")
+	@Column(name = "pbl_fim_dt", nullable = false, columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	public LocalDate dataFimPublicacao;
 	
-	@OneToOne
-	@JoinColumn(name = "pes_usuario_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "pes_id", nullable = false,
+			foreignKey = @ForeignKey(name = "fk_pes_pbl"))
 	public Usuario usuario;
-	
-	
 
 }
