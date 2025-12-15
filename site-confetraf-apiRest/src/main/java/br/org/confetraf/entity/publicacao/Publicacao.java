@@ -3,7 +3,7 @@ package br.org.confetraf.entity.publicacao;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import br.org.confetraf.entity.Auditable;
+import br.com.thadeugarrido.pessoa_core.entity.Auditable;
 import br.org.confetraf.entity.usuario.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
